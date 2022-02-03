@@ -17,7 +17,7 @@ app.use(express.static('public'));
 
 
 const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({extend: true}))
+app.use(bodyParser.urlencoded({extended: true}))
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
     })
 });
 app.get('/article/:slug', (req, res) => {
-    let query = `select * from article where slug="${req.params.slug}"`
+    let query = `SELECT * , author.name as author_name, article.name as article_name FROM author  iNNER JOIN article ON author.id = article.author_id WHERE slug="${req.params.slug}"`
     let articles = []
     con.query(query, (err, result) => {
         if (err) throw err;
@@ -52,5 +52,6 @@ app.get('/article/:slug', (req, res) => {
         })
     })
 });
+
 
 app.listen(3000, () => {console.log('App s started at http://localhost:3000'); });
