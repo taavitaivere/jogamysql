@@ -41,6 +41,16 @@ app.get('/', (req, res) => {
         })
     })
 });
-
+app.get('/article/:slug', (req, res) => {
+    let query = `select * from article where slug="${req.params.slug}"`
+    let articles = []
+    con.query(query, (err, result) => {
+        if (err) throw err;
+        articles = result
+        res.render('article', {
+            articles: articles
+        })
+    })
+});
 
 app.listen(3000, () => {console.log('App s started at http://localhost:3000'); });
