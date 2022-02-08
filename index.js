@@ -31,26 +31,11 @@ con.connect(function(err){
     console.log("Connected to joga_mysql db");
 })
 const articleRoutes = require('./routes/article');
+const authorRoutes = require('./routes/author')
 
 app.use('/', articleRoutes);
-app.use('/article', articleRoutes)
+app.use('/article', articleRoutes);
+app.use('//author/:id', authorRoutes)
 
-app.get('/author/:id', (req,res) => {
-    let query = `SELECT *, article.name AS Title FROM article INNER JOIN author ON article.author_id = author.id WHERE author.id="${req.params.id}"`;
-    let articles = []
-    let author = `select name from author where author.id="${req.params.id}"`;
-    con.query(query, (err,result) => {
-        if (err) throw err;
-        articles = result
-        con.query(author, (err, result) => {
-            if (err) throw err;
-            let authorData = result
-            res.render('author', {
-                author: authorData,
-                articles: articles
-            })
-        })
-    })
-});
 
 app.listen(3000, () => {console.log('App s started at http://localhost:3000'); });
