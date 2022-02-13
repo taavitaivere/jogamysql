@@ -11,8 +11,8 @@ const getAllArticlesByAuthor = ('/author/:id', (req,res) => {
             if (err) throw err;
             let authorData = result
             res.render('author', {
-                author: authorData,
-                articles: articles
+                articles: articles,
+                author: authorData
             })
         })
     })

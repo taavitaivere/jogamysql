@@ -1,7 +1,7 @@
-const express = ('express');
+const express = require('express');
 const router = express.Router();
 const articleController = require ('../controllers/author');
 
-router.get ('/', articleController.getAllArticlesByAuthor);
+router.get ('/:id', articleController.getAllArticlesByAuthor);
 
 module.exports = router;

@@ -31,11 +31,11 @@ con.connect(function(err){
     console.log("Connected to joga_mysql db");
 })
 const articleRoutes = require('./routes/article');
-const authorRoutes = require('./routes/author')
+const authorRoutes = require('./routes/author');
 
 app.use('/', articleRoutes);
 app.use('/article', articleRoutes);
-app.use('//author/:id', authorRoutes)
+app.use('/author', authorRoutes)
 
 
 app.listen(3000, () => {console.log('App s started at http://localhost:3000'); });
